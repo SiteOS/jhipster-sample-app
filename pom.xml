@@ -118,6 +118,42 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- java 11 forced libs (tp) -->
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>1.23</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>7.0</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>1.9.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>1.9.2</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.transaction</groupId>
+                <artifactId>javax.transaction-api</artifactId>
+                <version>1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml</groupId>
+                <artifactId>classmate</artifactId>
+                <version>1.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>1.0.2.Final</version>
+            </dependency>
             <!-- java 11 section (tp) -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
@@ -428,6 +464,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <release>11</release>
                     <compilerArgs>
                         <arg>-Xpkginfo:always</arg>
                     </compilerArgs>
@@ -529,7 +566,7 @@
                     Enable the line below to have remote debugging of your application on port 5005
                     <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
                     -->
-                    <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=50006</jvmArguments>
+                    <jvmArguments>--illegal-access=warn -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=50006</jvmArguments>
                 </configuration>
             </plugin>
             <plugin>
@@ -1124,7 +1161,7 @@
                             Enable the line below to have remote debugging of your application on port 5005
                             <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
                             -->
-                            <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=50006</jvmArguments>
+                            <jvmArguments>--illegal-access=warn -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=50006</jvmArguments>
                         </configuration>
                     </plugin>
                     <plugin>
