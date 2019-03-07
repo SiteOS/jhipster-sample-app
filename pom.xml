@@ -19,6 +19,19 @@
     <!-- jhipster-needle-distribution-management -->
 
     <properties>
+        <!--
+        # Attention: jaxb has to match JDK version
+        # java 8: 2.2.1
+        # java 11: 2.3.0(.1)
+        -->
+        <jaxb.version>2.3.0</jaxb.version>
+        <jaxb.runtime.version>2.3.1</jaxb.runtime.version>
+        <annotation.api>1.3.2</annotation.api>
+        <spring.cloud.version>not_used</spring.cloud.version>
+        <spring.boot.version>2.1.1.RELEASE</spring.boot.version>
+        <spring.security.version>5.1.2.RELEASE</spring.security.version>
+        <spring.version>5.1.3.RELEASE</spring.version>
+
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
         <java.version>1.8</java.version>
@@ -43,13 +56,13 @@
         <jhipster-dependencies.version>2.1.1</jhipster-dependencies.version>
         <!-- The spring-boot version should match the one managed by
         https://mvnrepository.com/artifact/io.github.jhipster/jhipster-dependencies/${jhipster-dependencies.version} -->
-        <spring-boot.version>2.0.8.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
         <!-- The hibernate version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
-        <hibernate.version>5.2.17.Final</hibernate.version>
+        <hibernate.version>5.3.7.Final</hibernate.version>
         <!-- The javassist version should match the one managed by
         https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.version} -->
-        <javassist.version>3.22.0-GA</javassist.version>
+        <javassist.version>3.24.1-GA</javassist.version>
         <!-- The liquibase version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
         <liquibase.version>3.5.5</liquibase.version>
@@ -105,6 +118,88 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- project specific dependencies (tp) -->
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.json</artifactId>
+                <version>1.1.4</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.8.5</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+            <!-- java 11 section (tp) -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${annotation.api}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>${jaxb.runtime.version}</version>
+            </dependency>
+            <!-- force javassist version (tp) -->
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+
+            <!-- spring boom section (tp) -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-bom</artifactId>
+                <version>${spring.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency -->
+            <!-- dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.RC2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency -->
+
             <dependency>
                 <groupId>io.github.jhipster</groupId>
                 <artifactId>jhipster-dependencies</artifactId>
@@ -117,6 +212,53 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- project specific dependencies (tp) -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <!-- WebConfigurer uses UndertowOptions, hence -->
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-core</artifactId>
+        </dependency>
+
+        <!-- java 11 section (tp) -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+        </dependency>
+
+        <!-- spring boot section (tp) -->
+
         <dependency>
             <groupId>io.github.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
@@ -304,6 +446,38 @@
         </dependency>
         <!-- Spring Cloud -->
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cloud-connectors</artifactId>
         </dependency>
@@ -330,6 +504,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <compilerArgs>
+                        <arg>-Xpkginfo:always</arg>
+                    </compilerArgs>
+                    <!-- setting this to 'false' makes compilation incremental (sic!) but is not reliable (tp) -->
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
@@ -343,12 +522,42 @@
                             <version>${hibernate.version}</version>
                         </path>
 
+                        <!-- java 11 section (tp) -->
+                        <path>
+                            <groupId>javax.xml.bind</groupId>
+                            <artifactId>jaxb-api</artifactId>
+                            <version>${jaxb.version}</version>
+                        </path>
+                        <path>
+                            <groupId>com.sun.xml.bind</groupId>
+                            <artifactId>jaxb-core</artifactId>
+                            <version>${jaxb.version}</version>
+                        </path>
+                        <path>
+                            <groupId>com.sun.xml.bind</groupId>
+                            <artifactId>jaxb-impl</artifactId>
+                            <version>${jaxb.version}</version>
+                        </path>
+                        <path>
+                            <groupId>javax.annotation</groupId>
+                            <artifactId>javax.annotation-api</artifactId>
+                            <version>${annotation.api}</version>
+                        </path>
+                        <path>
+                            <groupId>javax.activation</groupId>
+                            <artifactId>activation</artifactId>
+                            <version>1.1.1</version>
+                        </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -396,6 +605,7 @@
                     Enable the line below to have remote debugging of your application on port 5005
                     <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
                     -->
+                    <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=50006</jvmArguments>
                 </configuration>
             </plugin>
             <plugin>
@@ -567,7 +777,7 @@
                             <requireJavaVersion>
                                 <!-- Until JHipster supports JDK 9 -->
                                 <message>You are running an incompatible version of Java. JHipster requires JDK ${java.version}</message>
-                                <version>[1.8,1.9)</version>
+                                <version>[1.8,12)</version>
                             </requireJavaVersion>
                         </rules>
                     </configuration>
@@ -594,6 +804,7 @@
                             <configuration>
                                 <outputDirectory>${project.build.directory}/classes</outputDirectory>
                                 <useDefaultDelimiters>false</useDefaultDelimiters>
+                                <overwrite>true</overwrite>
                                 <delimiters>
                                     <delimiter>#</delimiter>
                                 </delimiters>
@@ -989,6 +1200,7 @@
                             Enable the line below to have remote debugging of your application on port 5005
                             <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
                             -->
+                            <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=50006</jvmArguments>
                         </configuration>
                     </plugin>
                     <plugin>
