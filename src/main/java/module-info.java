@@ -1,10 +1,11 @@
 open module io.github.jhipster.sample {
+
     requires org.apache.logging.log4j;
     requires jackson.annotations;
 
     requires cache.api;
 
-    // requires java.activation;
+    // requires activation;
     requires java.instrument;
     requires java.persistence;
     requires java.sql;
