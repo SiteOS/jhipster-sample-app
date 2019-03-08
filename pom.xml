@@ -478,6 +478,16 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Automatic-Module-Name>io.github.jhipster.sample</Automatic-Module-Name>
+                            <Main-Class>io.github.jhipster.sample.JhipsterSampleApplicationApp</Main-Class>
+                        </manifestEntries>
+                    </archive>
                     <outputDirectory>
                         ${project.build.directory}/modules
                     </outputDirectory>
