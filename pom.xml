@@ -482,6 +482,17 @@
                         ${project.build.directory}/modules
                     </outputDirectory>
                 </configuration>
+                <!-- also create jar -->
+                <!-- https://stackoverflow.com/questions/10862980/maven-generate-jar-and-war -->
+                <executions>
+                    <execution>
+                        <id>make-a-jar</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
